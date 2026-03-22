@@ -6,13 +6,14 @@ Sebuah asisten AI pribadi berbasis CLI yang dibangun menggunakan **LangChain**, 
 
 - **Command Line Interface (CLI):** Antarmuka terminal yang sederhana dan interaktif.
 - **Local AI Execution:** Menggunakan Ollama untuk menjalankan model AI secara lokal, memastikan privasi data dan efisiensi.
-- **Tools Integrations:** Agent dilengkapi dengan kemampuan untuk melakukan pencarian (DuckDuckGo), web scraping (BeautifulSoup), system monitoring (psutil, GPUtil), dan pembuatan dokumen (fpdf2).
+- **Tools Integrations:** Agent dilengkapi dengan kemampuan untuk melakukan pencarian dan download gambar (via SearXNG), web scraping (BeautifulSoup), system monitoring (psutil), manipulasi file/direktori, dan pembuatan dokumen (fpdf2).
 - **Workspace Isolation:** Mengelola dan menjalankan file secara terkendali pada folder workspace.
 
 ## 📋 Persyaratan Sistem
 
 - Python 3.8 atau lebih baru
 - [Ollama](https://ollama.com/) (terpasang dan berjalan dengan model yang ditentukan di konfigurasi)
+- [Docker](https://docs.docker.com/get-docker/) (untuk menjalankan SearXNG lokal)
 
 ## 🚀 Cara Instalasi
 
@@ -32,6 +33,18 @@ Sebuah asisten AI pribadi berbasis CLI yang dibangun menggunakan **LangChain**, 
    ```bash
    pip install -r requirements.txt
    ```
+
+4. Menjalankan SearXNG via Docker:
+   Agent ini menggunakan SearXNG sebagai mesin pencari lokal untuk mendapatkan berita dan gambar dari internet tanpa takut API limit. Jalankan SearXNG menggunakan Docker:
+   ```bash
+   docker run -d --name searxng \
+     -p 8080:8080 \
+     -v ${PWD}/searxng:/etc/searxng \
+     -e "BASE_URL=http://localhost:8080/" \
+     -e "INSTANCE_NAME=agent-search" \
+     searxng/searxng:latest
+   ```
+   *Catatan: Pastikan container ini menyala sebelum menggunakan fitur `internet_search` atau `search_and_download_image`.*
 
 ## ⚙️ Konfigurasi
 
