@@ -15,6 +15,6 @@ OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL", "kimi-k2.5:cloud")
 SEARXNG_URL = os.getenv("SEARXNG_URL", "http://localhost:8080")
 
 # Agent settings
-AGENT_NAME = "Jarvis"
+AGENT_NAME = "Jamal"
 MAX_ITERATIONS = 30          # Batas loop ReAct agent (ditingkatkan agar tidak mudah limit)
-REQUEST_TIMEOUT = 15         # Timeout HTTP (detik)
+REQUEST_TIMEOUT = 25         # Timeout HTTP (detik)
