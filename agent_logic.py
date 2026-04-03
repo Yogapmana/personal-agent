@@ -1,13 +1,13 @@
 """
 agent_logic.py — Inti logika Personal AI Agent menggunakan LangChain + LangGraph
 """
+
+from langchain_core.messages import AIMessage, HumanMessage
 from langchain_ollama import ChatOllama
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_agent as _create_agent
 
-from config import OLLAMA_BASE_URL, OLLAMA_MODEL, AGENT_NAME, MAX_ITERATIONS
+from config import AGENT_NAME, MAX_ITERATIONS, OLLAMA_BASE_URL, OLLAMA_MODEL
 from tools import ALL_TOOLS
-
 
 # ──────────────────────────────────────────────────────────────
 # System Prompt — Karakter "asisten gaul" bahasa Indonesia
@@ -57,10 +57,10 @@ def create_agent():
         temperature=0.7,
     )
 
-    agent = create_react_agent(
+    agent = _create_agent(
         model=llm,
         tools=ALL_TOOLS,
-        prompt=SYSTEM_PROMPT,
+        system_prompt=SYSTEM_PROMPT,
     )
     return agent
 
